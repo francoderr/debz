@@ -13,7 +13,7 @@ import fileUpload from 'express-fileupload';
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect("mongodb://0.0.0.0:27017/NicolesDB2", {
+mongoose.connect("mongodb://0.0.0.0:27017/DebzDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

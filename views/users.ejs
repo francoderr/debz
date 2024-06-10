@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Furniture Store</title>
+    <title>Fresh Farm</title>
     <style>
       :root {
-        --theme-color: #e2b659;
+        --theme-color: #008600;
       }
 
       body {
@@ -25,6 +25,7 @@
 
       .headerDiv {
         display: flex;
+        align-items: center;
       }
 
       #toggleSidebar {
@@ -33,30 +34,32 @@
         color: white;
         font-size: 20px;
         cursor: pointer;
+        margin-right: 10px;
       }
 
       .container {
         display: flex;
+        flex-direction: column;
         height: calc(100vh - 100px); /* Adjusted for header height */
       }
 
       .sidebar {
-        width: 200px;
+        display: flex;
         background-color: #333;
-        padding: 20px;
-        height: 100vh;
-        position: fixed;
-        top: 100px; /* Start below the header */
-        transition: transform 0.3s ease;
+        padding: 10px;
+        width: 100%;
+        justify-content: space-around;
       }
 
       .sidebar ul {
+        display: flex;
         list-style-type: none;
         padding: 0;
+        margin: 0;
       }
 
       .sidebar ul li {
-        margin: 15px 0;
+        margin: 0 15px;
       }
 
       .sidebar ul li a {
@@ -66,27 +69,26 @@
 
       main {
         flex: 1;
-        margin-left: 250px; /* Same as sidebar width */
         padding: 20px;
         overflow-y: auto;
       }
 
       .sidebar.collapsed {
-        transform: translateX(-100%);
+        display: none;
       }
 
       @media (max-width: 768px) {
         .sidebar {
-          transform: translateX(-100%);
-          position: absolute;
+          flex-direction: column;
+          align-items: center;
         }
 
-        .sidebar.collapsed {
-          transform: translateX(0);
+        .sidebar ul {
+          flex-direction: column;
         }
 
-        main {
-          margin-left: 0;
+        .sidebar ul li {
+          margin: 10px 0;
         }
       }
 
@@ -128,6 +130,7 @@
       .edit-button:hover {
         background-color: #d4a056;
       }
+
       .logout-button {
         background-color: black;
         color: white;
@@ -148,7 +151,7 @@
     <header>
       <div class="headerDiv">
         <button id="toggleSidebar">☰</button>
-        <h1>Furniture Store</h1>
+        <h1>Fresh Farm Stock & Sales Grocery</h1>
       </div>
       <a href="/logout"><button class="logout-button">Logout</button></a>
     </header>
@@ -204,7 +207,7 @@
           userTableBody.appendChild(row);
         });
       }
-      
+
       function editUser(userId) {
         window.location.href = `/editUzer/${userId}`;
       }

@@ -1,282 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Furniture Store</title>
-    <style>
-      :root {
-        --theme-color: #e2b659;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Farm</title>
+  <style>
+    :root {
+      --theme-color: #008600;
+    }
 
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-      }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
 
-      header {
-        background-color: var(--theme-color);
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 10px;
-      }
+    header {
+      background-color: var(--theme-color);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 10px;
+    }
 
-      .headerDiv {
-        display: flex;
-        align-items: center;
-      }
+    .headerDiv {
+      display: flex;
+      align-items: center;
+    }
 
-      #toggleSidebar {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-        margin-right: 10px;
-      }
+    #toggleSidebar {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
 
-      .container {
-        display: flex;
-        height: calc(100vh - 100px); /* Adjusted for header height */
-      }
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 100px); /* Adjusted for header height */
+    }
 
+    .sidebar {
+      display: flex;
+      background-color: #333;
+      padding: 10px;
+      width: 100%;
+      justify-content: space-around;
+    }
+
+    .sidebar ul {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      margin: 0 15px;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: white;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .sidebar.collapsed {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
       .sidebar {
-        width: 200px;
-        background-color: #333;
-        padding: 20px;
-        height: 100vh;
-        position: fixed;
-        top: 100px; /* Start below the header */
-        transition: transform 0.3s ease;
+        flex-direction: column;
+        align-items: center;
       }
 
       .sidebar ul {
-        list-style-type: none;
-        padding: 0;
+        flex-direction: column;
       }
 
       .sidebar ul li {
-        margin: 15px 0;
+        margin: 10px 0;
       }
+    }
 
-      .sidebar ul li a {
-        text-decoration: none;
-        color: white;
-      }
+    .logout-button {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
 
-      main {
-        flex: 1;
-        margin-left: 250px; /* Same as sidebar width */
-        padding: 20px;
-        overflow-y: auto;
-      }
+    .logout-button:hover {
+      background-color: #e5533c;
+    }
 
-      .sidebar.collapsed {
-        transform: translateX(-100%);
-      }
+    .prods {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
 
-      @media (max-width: 768px) {
-        .sidebar {
-          transform: translateX(-100%);
-          position: absolute;
-        }
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      transition: transform 0.2s;
+    }
 
-        .sidebar.collapsed {
-          transform: translateX(0);
-        }
+    .product:hover {
+      transform: translateY(-10px);
+      cursor: pointer;
+    }
 
-        main {
-          margin-left: 0;
-        }
-      }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
 
-      .logout-button {
-        background-color: black;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-      }
+    .product-details {
+      padding: 15px;
+    }
 
-      .logout-button:hover {
-        background-color: #e5533c;
-      }
+    .product-details h3 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
 
-      .prods {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-      }
+    .product-details p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
 
-      .product {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        overflow: hidden;
-        background: #fff;
-        transition: transform 0.2s;
-      }
+    .product-price {
+      color: var(--theme-color);
+      font-weight: bold;
+      margin-top: 10px;
+    }
 
-      .product:hover {
-        transform: translateY(-10px);
-        cursor: pointer;
-      }
+    .add-to-cart {
+      background-color: var(--theme-color);
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
 
-      .product img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-      }
-
-      .product-details {
-        padding: 15px;
-      }
-
-      .product-details h3 {
-        margin: 0 0 10px 0;
-        font-size: 18px;
-      }
-
-      .product-details p {
-        margin: 5px 0;
-        font-size: 14px;
-      }
-
-      .product-price {
-        color: var(--theme-color);
-        font-weight: bold;
-        margin-top: 10px;
-      }
-
-      .add-to-cart {
-        background-color: var(--theme-color);
-        color: white;
-        border: none;
-        padding: 10px;
-        margin-top: 10px;
-        cursor: pointer;
-        border-radius: 4px;
-      }
-
-      .add-to-cart:hover {
-        background-color: #d4a056;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="headerDiv">
-        <button id="toggleSidebar">☰</button>
-        <h1>Furniture Store</h1>
-      </div>
-      <a href="/logout"><button class="logout-button">Logout</button></a>
-    </header>
-    <div class="container">
-      <nav id="sidebar" class="sidebar">
-        <ul>
-          <li><a href="/dashboard">Home</a></li>
-          <li><a href="/myCart">My Cart</a></li>
-          <li><a href="/users">admin</a></li>
-        </ul>
-      </nav>
-      <main>
-        <div class="prods"></div>
-      </main>
+    .add-to-cart:hover {
+      background-color: #d4a056;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="headerDiv">
+      <button id="toggleSidebar">☰</button>
+      <h1>Fresh Farm Stock & Sales Grocery</h1>
     </div>
-    <script>
-      document
-        .getElementById("toggleSidebar")
-        .addEventListener("click", function () {
-          document.getElementById("sidebar").classList.toggle("collapsed");
-        });
+    <a href="/logout"><button class="logout-button">Logout</button></a>
+  </header>
+  <div class="container">
+    <nav id="sidebar" class="sidebar">
+      <ul>
+        <li><a href="/dashboard">Home</a></li>
+        <li><a href="/myCart">My Cart</a></li>
+        <li><a href="/users">admin</a></li>
+      </ul>
+    </nav>
+    <main>
+      <div class="prods"></div>
+    </main>
+  </div>
+  <script>
+    document
+      .getElementById("toggleSidebar")
+      .addEventListener("click", function () {
+        document.getElementById("sidebar").classList.toggle("collapsed");
+      });
 
-      async function fetchProducts() {
-        try {
-          const response = await fetch("http://localhost:3000/listProducts");
-          const data = await response.json();
+    async function fetchProducts() {
+      try {
+        const response = await fetch("http://localhost:3000/listProducts");
+        const data = await response.json();
 
-          if (data.Status === "Success") {
-            displayProducts(data.products);
-          } else {
-            console.error("Failed to retrieve products");
-          }
-        } catch (error) {
-          console.error("Error fetching products:", error);
+        if (data.Status === "Success") {
+          displayProducts(data.products);
+        } else {
+          console.error("Failed to retrieve products");
         }
+      } catch (error) {
+        console.error("Error fetching products:", error);
       }
+    }
 
-      function displayProducts(products) {
-        const productsContainer = document.querySelector(".prods");
-        productsContainer.innerHTML = ""; // Clear any existing content
+    function displayProducts(products) {
+      const productsContainer = document.querySelector(".prods");
+      productsContainer.innerHTML = ""; // Clear any existing content
 
-        products.forEach((product) => {
-          const productElement = document.createElement("div");
-          productElement.classList.add("product");
+      products.forEach((product) => {
+        const productElement = document.createElement("div");
+        productElement.classList.add("product");
 
-          const productImage = document.createElement("img");
-          productImage.src = `${product.image}`;
-          productImage.alt = product.title;
+        const productImage = document.createElement("img");
+        productImage.src = `${product.image}`;
+        productImage.alt = product.title;
 
-          const productDetails = document.createElement("div");
-          productDetails.classList.add("product-details");
+        const productDetails = document.createElement("div");
+        productDetails.classList.add("product-details");
 
-          const productTitle = document.createElement("h3");
-          productTitle.textContent = product.title;
+        const productTitle = document.createElement("h3");
+        productTitle.textContent = product.title;
 
-          const productDescription = document.createElement("p");
-          productDescription.textContent = product.description;
+        const productDescription = document.createElement("p");
+        productDescription.textContent = product.description;
 
-          const productPrice = document.createElement("p");
-          productPrice.classList.add("product-price");
-          productPrice.textContent = `ksh ${product.price}`;
+        const productPrice = document.createElement("p");
+        productPrice.classList.add("product-price");
+        productPrice.textContent = `ksh ${product.price}`;
 
-          const addToCartButton = document.createElement("button");
-          addToCartButton.classList.add("add-to-cart");
-          addToCartButton.textContent = "Add to Cart";
-          addToCartButton.addEventListener("click", (event) => {
-            event.stopPropagation();
-            addToCart(product._id);
-          });
-
-          productDetails.appendChild(productTitle);
-          productDetails.appendChild(productDescription);
-          productDetails.appendChild(productPrice);
-          productDetails.appendChild(addToCartButton);
-
-          productElement.appendChild(productImage);
-          productElement.appendChild(productDetails);
-
-          productsContainer.appendChild(productElement);
+        const addToCartButton = document.createElement("button");
+        addToCartButton.classList.add("add-to-cart");
+        addToCartButton.textContent = "Add to Cart";
+        addToCartButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          addToCart(product._id);
         });
-      }
 
-      function addToCart(productId) {
-        fetch(`http://localhost:3000/addToCart`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ productId: productId }),
+        productDetails.appendChild(productTitle);
+        productDetails.appendChild(productDescription);
+        productDetails.appendChild(productPrice);
+        productDetails.appendChild(addToCartButton);
+
+        productElement.appendChild(productImage);
+        productElement.appendChild(productDetails);
+
+        productsContainer.appendChild(productElement);
+      });
+    }
+
+    function addToCart(productId) {
+      fetch(`http://localhost:3000/addToCart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId: productId }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.Status === "Success") {
+            alert("Product added to cart successfully!");
+          } else {
+            console.error("Failed to add product to cart");
+            console.log(data);
+          }
         })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.Status === "Success") {
-              alert("Product added to cart successfully!");
-            } else {
-              console.error("Failed to add product to cart");
-              console.log(data)
-            }
-          })
-          .catch((error) => {
-            console.error("Error adding product to cart:", error);
-          });
-      }
+        .catch((error) => {
+          console.error("Error adding product to cart:", error);
+        });
+    }
 
-      fetchProducts();
-    </script>
-  </body>
+    fetchProducts();
+  </script>
+</body>
 </html>
