@@ -217,7 +217,7 @@
         <div class="cart-summary">
           <div class="cart-details">
             <p id="total-items">Total Items: 0</p>
-            <p id="total-price">Total Price: $0</p>
+            <p id="total-price">Total Price: kshs. 0</p>
           </div>
           <button class="order-btn" onclick="placeOrder()">Order</button>
         </div>
@@ -281,7 +281,7 @@
 
           if (data.Status === "Success") {
             const totalPriceElement = document.getElementById("total-price");
-            const totalPrice = totalPriceElement.textContent.split("$")[1];
+            const totalPrice = totalPriceElement.textContent.split("kshs. ")[1];
             window.location.href = `/checkout?totalPrice=${totalPrice}`;
           } else {
             console.error("Failed to place order");
@@ -322,7 +322,7 @@
 
           const itemPrice = document.createElement("p");
           itemPrice.classList.add("item-price");
-          itemPrice.textContent = `$${item.price}`;
+          itemPrice.textContent = `kshs. ${item.price}`;
 
           const removeBtn = document.createElement("button");
           removeBtn.classList.add("remove-btn");
@@ -341,7 +341,7 @@
         });
 
         totalItemsElement.textContent = `Total Items: ${totalItems}`;
-        totalPriceElement.textContent = `Total Price: $${totalPrice}`;
+        totalPriceElement.textContent = `Total Price: kshs. ${totalPrice}`;
       }
 
       // Fetch cart items when the page loads
